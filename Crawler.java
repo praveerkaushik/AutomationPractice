@@ -15,9 +15,8 @@ public class Crawler {
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://www.lego.com/en-us/juniors");
 		driver.navigate().refresh();
-		driver.manage().timeouts().implicitlyWait(2000, TimeUnit.MILLISECONDS);
-		System.out.println("Test message for checking script execution");
-		List<WebElement> list = driver.findElements(By.xpath("//a[contains(@href,'www.webqa.lego.com/en-us/juniors/')]"));
+		driver.manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS);
+		List<WebElement> list = driver.findElements(By.xpath("//a[contains(@href,'www.lego.com/en-us/juniors')]"));
 		ArrayList<String> links = new ArrayList<String>();
 		for(int i=0; i<list.size(); i++)
 		{
@@ -26,13 +25,12 @@ public class Crawler {
 			s.addAll(links);
 			links.clear();
 			links.addAll(s);
-			System.out.println(links.get(i));
 		}
 		list.clear();
 		for(int j=0; j<links.size(); j++)
 		{
 			driver.get(links.get(j));
-			list = driver.findElements(By.xpath("//a[contains(@href,'https://www.lego.com/en-us/juniors/')]"));
+			list = driver.findElements(By.xpath("//a[contains(@href,'https://www.lego.com/en-us/juniors')]"));
 			for(int k=0; k<list.size(); k++)
 			{
 				links.add(list.get(k).getAttribute("href"));
